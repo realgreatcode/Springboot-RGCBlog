@@ -1,4 +1,4 @@
-package shop.realgreatcode.rgcblog.controller;
+package shop.realgreatcode.rgcblog.controller.viewtest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
