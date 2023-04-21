@@ -37,7 +37,7 @@ public class SecurityConfig {
                     // View에서 사용하려고!!
                     MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
                     HttpSession session = request.getSession();
-                    session.setAttribute(("sessionUser", myUserDetails.getUser());
+                    session.setAttribute("sessionUser", myUserDetails.getUser());
 
                     response.sendRedirect("/");
                 })
