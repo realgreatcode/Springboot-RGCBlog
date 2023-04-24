@@ -1,19 +1,25 @@
 package shop.realgreatcode.rgcblog.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import shop.realgreatcode.rgcblog.dto.board.BoardRequest;
+import shop.realgreatcode.rgcblog.model.board.Board;
+import shop.realgreatcode.rgcblog.model.board.BoardQueryRepository;
 import shop.realgreatcode.rgcblog.model.board.BoardRepository;
 import shop.realgreatcode.rgcblog.model.user.User;
 import shop.realgreatcode.rgcblog.model.user.UserRepository;
 
-import javax.transaction.Transactional;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
+    private final BoardQueryRepository boardQueryRepository;
 
     @Transactional
     public void 글쓰기(BoardRequest.SaveInDTO saveInDTO, Long userId){
@@ -30,4 +36,10 @@ public class BoardService {
         }
     }
 
+    @Transactional(readOnly = true) // 변경감지 하지마, 고립성(REPEATABLE READ)
+    public Page<Board> 글목록보기(Pageable pageable) { // CSR은 DTO로 변경해서 돌려줘야 함.
+        // 1. 모든 전략은 Lazy : 이유는 필요할때만 가져오려고
+        // 2. 필요할때는 직접 fetch join을 사용해라
+        return boardQueryRepository.findAll(pageable);
+    }
 }
