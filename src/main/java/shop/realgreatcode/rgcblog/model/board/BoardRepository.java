@@ -9,6 +9,5 @@ import shop.realgreatcode.rgcblog.model.board.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
-    @EntityGraph(attributePaths = "user")
-    Page<Board> findAll(Pageable pageable);
+
 }
