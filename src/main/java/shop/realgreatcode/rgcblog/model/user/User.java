@@ -1,5 +1,6 @@
 package shop.realgreatcode.rgcblog.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +25,9 @@ public class User {
     private String role; // USER(고객)
     private String profile;
     private Boolean status;
+    @JsonIgnore
     private LocalDateTime createdAt;
+    @JsonIgnore
     private LocalDateTime updatedAt;
     public void changeProfile(String profile){
         this.profile = profile;

@@ -1,5 +1,6 @@
 package shop.realgreatcode.rgcblog.model.board;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import shop.realgreatcode.rgcblog.model.user.User;
 
@@ -26,7 +27,9 @@ public class Board {
 
     @Lob // 4GB
     private String thumbnail; // content에 등록된 사진중 하나를 선정해서 자동으로 만들기
+    @JsonIgnore
     private LocalDateTime createdAt;
+    @JsonIgnore
     private LocalDateTime updatedAt;
 
     @PrePersist
