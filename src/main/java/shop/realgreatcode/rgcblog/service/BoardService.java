@@ -2,18 +2,16 @@ package shop.realgreatcode.rgcblog.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import shop.realgreatcode.rgcblog.core.exception.ssr.Exception400;
+import shop.realgreatcode.rgcblog.core.util.MyParseUtil;
 import shop.realgreatcode.rgcblog.dto.board.BoardRequest;
 import shop.realgreatcode.rgcblog.model.board.Board;
 import shop.realgreatcode.rgcblog.model.board.BoardQueryRepository;
 import shop.realgreatcode.rgcblog.model.board.BoardRepository;
 import shop.realgreatcode.rgcblog.model.user.User;
 import shop.realgreatcode.rgcblog.model.user.UserRepository;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -30,8 +28,11 @@ public class BoardService {
                     ()-> new RuntimeException("유저를 찾을 수 없습니다")
             );
 
-            // 2. 게시글 쓰기
-            boardRepository.save(saveInDTO.toEntity(userPS));
+            // 2. 섬네일 만들기
+            String thumbnail = MyParseUtil.getThumbnail(saveInDTO.getContent());
+
+            // 3. 게시글 쓰기
+            boardRepository.save(saveInDTO.toEntity(userPS, thumbnail));
         }catch (Exception e){
             throw new RuntimeException("글쓰기 실패 : "+e.getMessage());
         }

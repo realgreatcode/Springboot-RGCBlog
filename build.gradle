@@ -5,7 +5,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
-group = 'shop.realgreatcode'
+group = 'shop.mtcoding'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -22,6 +22,9 @@ repositories {
 }
 
 dependencies {
+	// https://mvnrepository.com/artifact/org.qlrm/qlrm
+	implementation group: 'org.qlrm', name: 'qlrm', version: '2.1.1'
+
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'org.jsoup:jsoup:1.15.3'
 	implementation 'javax.servlet:jstl'
