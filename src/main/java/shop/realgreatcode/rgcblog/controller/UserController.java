@@ -3,6 +3,7 @@ package shop.realgreatcode.rgcblog.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,8 @@ public class UserController {
     // write (post) : /리소스/식별자(pk, uk)/save or delete or update
     // read (get) : /리소스/식별자(pk, uk)
     @PostMapping("/join")
-    public String join(UserRequest.JoinInDTO joinInDTO){ // x-www-urlencoded
+    public String join(UserRequest.JoinInDTO joinInDTO, Errors errors){ // x-www-urlencoded
+        // username 검증!!!
         userService.회원가입(joinInDTO);
         return "redirect:/loginForm";
     }
